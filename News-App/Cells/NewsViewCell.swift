@@ -11,13 +11,13 @@ class NewsViewCell: UITableViewCell {
 
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    
     
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,13 +29,12 @@ class NewsViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        subtitleLabel.text = nil
         newsImage.image = nil
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel){
         titleLabel.text = viewModel.title
-        subtitleLabel.text = viewModel.subtitle
+        
         
         if let data = viewModel.imageData {
             newsImage.image = UIImage(data: data)

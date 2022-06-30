@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsDisplaypage: UIViewController {
     
@@ -16,6 +17,26 @@ class NewsDisplaypage: UIViewController {
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var sourceButton: UIButton!
+    
+    
+    @IBAction func buttonAction (_ sender: UIButton) {
+
+            
+
+            guard let url = URL(string: article?.url ?? "") else {
+
+                return
+
+            }
+
+            let vc = SFSafariViewController(url: url)
+
+            present(vc,animated: true )
+
+        }
+    
+    
     
     
     override func viewDidLoad() {

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SafariServices
+
 
 
 class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -16,12 +16,7 @@ class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource
      var articles = [Article]()
      var viewModels = [NewsTableViewCellViewModel]()
     
-   
-    
-    
-    
-    
-    override func viewDidLoad() {
+override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
@@ -31,10 +26,6 @@ class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource
         fetchTopStories()
        
     }
-    
-    
-   
-    
     
     private func fetchTopStories() {
         APICaller.shared.getTopStories { [weak self] result in
@@ -71,26 +62,16 @@ class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let article = articles[indexPath.row]
-//
-//        guard let url = URL(string: article.url ?? "") else {
-//            return
-//        }
-//        let vc = SFSafariViewController(url: url)
-//        present(vc,animated: true )
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "NextView") as! NewsDisplaypage
-
-                nextViewController.article = articles[indexPath.row]
-
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "NextView") as! NewsDisplaypage
+        nextViewController.article = articles[indexPath.row]
         navigationController?.pushViewController(nextViewController, animated: true)
-        
+
         }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 300
     }
     
     
