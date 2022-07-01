@@ -33,11 +33,14 @@ class SearchHomepage: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+//Creating Searchbar as a Navigation Item
+    
     private func createSearchBar(){
         navigationItem.searchController = searchVC
         searchVC.searchBar.delegate = self
     }
     
+//MARK: Passing Data through ViewModel via APICaller
     
     private func fetchTopStories() {
         APICaller.shared.getTopStories { [weak self] result in
@@ -61,6 +64,7 @@ class SearchHomepage: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
+  //MARK: TableView Datasource and Delegate functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -73,32 +77,21 @@ class SearchHomepage: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let article = articles[indexPath.row]
-//
-//        guard let url = URL(string: article.url ?? "") else {
-//            return
-//        }
-//        let vc = SFSafariViewController(url: url)
-//        present(vc,animated: true )
+  //Pushing NewsDisplaypage upon clicking the cell
+        
     let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-
     let nextViewController = storyBoard.instantiateViewController(withIdentifier: "NextView") as! NewsDisplaypage
-
-     nextViewController.article = articles[indexPath.row]
-
-        navigationController?.pushViewController(nextViewController, animated: true)
-        
-        
-
-        
-
-        
+    nextViewController.article = articles[indexPath.row]
+    navigationController?.pushViewController(nextViewController, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }
     
+    
+
+//MARK: Action on clicking searchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else{
             return

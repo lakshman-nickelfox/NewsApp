@@ -32,6 +32,7 @@ class NewsViewCell: UITableViewCell {
         newsImage.image = nil
     }
     
+    //Sending Title and Image through ViewModel
     func configure(with viewModel: NewsTableViewCellViewModel){
         titleLabel.text = viewModel.title
         

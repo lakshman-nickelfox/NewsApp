@@ -16,7 +16,7 @@ class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource
      var articles = [Article]()
      var viewModels = [NewsTableViewCellViewModel]()
     
-override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         table.delegate = self
         table.dataSource = self
@@ -27,6 +27,7 @@ override func viewDidLoad() {
        
     }
     
+//MARK: Passing Data through ViewModel via APICaller
     private func fetchTopStories() {
         APICaller.shared.getTopStories { [weak self] result in
             switch result {
@@ -48,7 +49,7 @@ override func viewDidLoad() {
     }
     
     
-    
+//MARK: TableView delegate and datasource fucntions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -62,18 +63,16 @@ override func viewDidLoad() {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+ //Pushing NewsDisplaypage upon clicking the cell
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "NextView") as! NewsDisplaypage
         nextViewController.article = articles[indexPath.row]
         navigationController?.pushViewController(nextViewController, animated: true)
-
-        }
-    
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }
-    
-    
 }
 

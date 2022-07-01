@@ -20,20 +20,13 @@ class NewsDisplaypage: UIViewController {
     @IBOutlet weak var sourceButton: UIButton!
     
     
+    //Button action for Displaying the source Article via url
     @IBAction func buttonAction (_ sender: UIButton) {
-
-            
-
-            guard let url = URL(string: article?.url ?? "") else {
-
-                return
-
-            }
-
-            let vc = SFSafariViewController(url: url)
-
+        guard let url = URL(string: article?.url ?? "") else {
+            return
+        }
+        let vc = SFSafariViewController(url: url)
             present(vc,animated: true )
-
         }
     
     
@@ -42,6 +35,7 @@ class NewsDisplaypage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Passing Headline, Description and Image to article
         self.headlineLabel.text = article?.title
         self.descriptionLabel.text = article?.description
         if article?.urlToImage != nil
@@ -52,13 +46,14 @@ class NewsDisplaypage: UIViewController {
         }
         else{
             newsImageView.image = UIImage(named: "emptyImage")
+            newsImageView.contentMode = .scaleAspectFill
         }
 
     }
     
 }
     extension UIImageView {
-        
+        //function to download image from an API using URLSession
         func downloadImage (from url:URL)
         {
             contentMode = .scaleAspectFill
