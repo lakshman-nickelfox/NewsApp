@@ -56,7 +56,9 @@ class TopRatedpage: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewsViewCell
+        guard let cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? NewsViewCell else {
+            fatalError()
+        }
         cell.configure(with: viewModels[indexPath.row])
         return cell
     }
